@@ -1205,6 +1205,62 @@ section {
       .textContent = new Date().getFullYear();
 
     renderProducts();
+
+  
+/* ==========================================
+   DISABLE RIGHT CLICK & DEVELOPER SHORTCUTS
+========================================== */
+
+// 1. Disable Right Click
+document.addEventListener("contextmenu", function(e) {
+  e.preventDefault();
+});
+
+// 2. Disable Keyboard Shortcuts
+document.addEventListener("keydown", function(e) {
+
+  const key = e.key.toLowerCase();
+
+  // Disable F12
+  if (e.key === "F12") {
+    e.preventDefault();
+    return;
+  }
+
+  // Disable Ctrl + Shift + I / J / C
+  if (
+    e.ctrlKey &&
+    e.shiftKey &&
+    ["i", "j", "c"].includes(key)
+  ) {
+    e.preventDefault();
+    return;
+  }
+
+  // Disable Ctrl + U (View Source)
+  if (e.ctrlKey && key === "u") {
+    e.preventDefault();
+    return;
+  }
+
+  // Disable Cmd + Option + I / J / C (Mac)
+  if (
+    e.metaKey &&
+    e.altKey &&
+    ["i", "j", "c"].includes(key)
+  ) {
+    e.preventDefault();
+  }
+
+});
+
+// 3. Disable Image Dragging
+document.addEventListener("dragstart", function(e) {
+  if (e.target.closest("img")) {
+    e.preventDefault();
+  }
+});
+
   </script>
 
 </body>
